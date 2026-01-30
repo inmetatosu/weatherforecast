@@ -33,7 +33,7 @@ const weatherData = {
     rain: current.variables(1)!.value(),
     snowfall: current.variables(2)!.value(),
     wind_speed_10m: current.variables(3)!.value(),
-  },
+  },  
 };
 
 // The 'weatherData' object now contains a simple structure, with arrays of datetimes and weather information
