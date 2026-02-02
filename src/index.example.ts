@@ -30,6 +30,14 @@ app.use((error: Error, req: express.Request, res: express.Response, next: expres
   });
 });
 
+process.on('uncaughtException', (err) => {
+  console.error('uncaughtException:', err);
+});
+process.on('unhandledRejection', (reason) => {
+  console.error('unhandledRejection:', reason);
+});
+
+
 // Register the configured app with the Opal ToolsService
 // This allows the service to properly setup API endpoints as well as communicate properly with your functions
 const toolsService = new ToolsService(app);
@@ -120,6 +128,8 @@ class WeatherTools {
 
 // Start the server
 const PORT = process.env.PORT || 3000;
+console.log("About to listen. PORT=", process.env.PORT);
+
 app.listen(PORT, () => {
   console.log(`Opal Tools service running on port ${PORT}`);
   console.log(`Discovery endpoint automatically available at http://localhost:${PORT}/discovery`);
