@@ -107,8 +107,8 @@ class WeatherTools {
         const result = await response.json();
         weatherData = {
           temperature: result.main.temp,
-          condition: result.weather[0].main + (result.weather[0].description ? ` (${result.weather[0].description})` : ''),
-          location: `${result.name}, ${result.sys.country}`
+          // condition: result.weather[0].main + (result.weather[0].description ? ` (${result.weather[0].description})` : ''),
+          // location: `${result.name}, ${result.sys.country}`
         }
       }
 

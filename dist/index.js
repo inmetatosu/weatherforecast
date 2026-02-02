@@ -28,7 +28,7 @@ const toolsService = new ToolsService(app);
 // If you want to use the @tool decorator, your functions must be within a class declaration.
 class WeatherTools {
     // Register the tool. Provide a meaningful descriptions to help Opal understand how to use this tool.
-    async getWeather(parameters) {
+    async getTemperature(parameters) {
         try {
             const { city, state, country, units = '' } = parameters;
             const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
@@ -39,9 +39,9 @@ class WeatherTools {
             }
             // Start with mock data in case an API key is not configured.
             let weatherData = {
-                temperature: units === 'fahrenheit' ? 72 : 22,
-                condition: 'sunny',
-                location: `${city}, ${state}, ${country}`,
+                temperature: units === 'fahrenheit' ? 72 : 22
+                // condition: 'sunny',
+                // location: `${city}, ${state}, ${country}`,
             };
             // Check for API key and use this to retrieve live weather.
             if (process.env.OPENWEATHERMAP_API_KEY && process.env.OPENWEATHERMAP_API_KEY.trim() !== '') {
@@ -62,8 +62,8 @@ class WeatherTools {
                 const result = await response.json();
                 weatherData = {
                     temperature: result.main.temp,
-                    condition: result.weather[0].main + (result.weather[0].description ? ` (${result.weather[0].description})` : ''),
-                    location: `${result.name}, ${result.sys.country}`
+                    // condition: result.weather[0].main + (result.weather[0].description ? ` (${result.weather[0].description})` : ''),
+                    // location: `${result.name}, ${result.sys.country}`
                 };
             }
             // Return response to Opal
@@ -109,7 +109,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], WeatherTools.prototype, "getWeather", null);
+], WeatherTools.prototype, "getTemperature", null);
 // Discovery endpoint is automatically created at /discovery by ToolsService
 // Tool execution endpoints are automatically created by ToolsService
 // Start the server
