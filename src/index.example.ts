@@ -49,12 +49,6 @@ class WeatherTools {
         required: true
       },
       {
-        name: "state",
-        description: "The code for the state. E.g. 'KY' for Kentucky or 'NSW' for New South Wales.",
-        type: ParameterType.String,
-        required: false
-      },
-      {
         name: "country",
         description: "The country code. E.g. 'US' for United States or 'FR' for France.",
         type: ParameterType.String,
@@ -87,30 +81,30 @@ class WeatherTools {
       };
 
       // Check for API key and use this to retrieve live weather.
-      if(process.env.OPENWEATHERMAP_API_KEY && process.env.OPENWEATHERMAP_API_KEY.trim() !== ''){
-        // Build query parameters for OpenWeatherMap API GET request.
-        let q = new URLSearchParams();
-        if(state) 
-          q.append("q", `${city},${state},${country}`);
-        else 
-          q.append("q", `${city},${country}`);
-        q.append('units', units);
-        q.append("appid",process.env.OPENWEATHERMAP_API_KEY);
-
-        // Request live weather data.
-        const response = await fetch(`${apiUrl}?${q}`);
-        if(!response.ok){
-          throw new Error(`Response Error: ${response.status}`);
-        }
-
-        // Build response for Opal based on data from the API.
-        const result = await response.json();
-        weatherData = {
-          temperature: result.main.temp,
-          condition: result.weather[0].main + (result.weather[0].description ? ` (${result.weather[0].description})` : ''),
-          location: `${result.name}, ${result.sys.country}`
-        }
-      }
+      // if(process.env.OPENWEATHERMAP_API_KEY && process.env.OPENWEATHERMAP_API_KEY.trim() !== ''){
+      //   // Build query parameters for OpenWeatherMap API GET request.
+      //   let q = new URLSearchParams();
+      //   if(state) 
+      //     q.append("q", `${city},${state},${country}`);
+      //   else 
+      //     q.append("q", `${city},${country}`);
+      //   q.append('units', units);
+      //   q.append("appid",process.env.OPENWEATHERMAP_API_KEY);
+      //
+      //   // Request live weather data.
+      //   const response = await fetch(`${apiUrl}?${q}`);
+      //   if(!response.ok){
+      //     throw new Error(`Response Error: ${response.status}`);
+      //   }
+      //
+      //   // Build response for Opal based on data from the API.
+      //   const result = await response.json();
+      //   weatherData = {
+      //     temperature: result.main.temp,
+      //     condition: result.weather[0].main + (result.weather[0].description ? ` (${result.weather[0].description})` : ''),
+      //     location: `${result.name}, ${result.sys.country}`
+      //   }
+      // }
 
       // Return response to Opal
       return weatherData;
