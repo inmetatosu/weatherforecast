@@ -39,8 +39,8 @@ class WeatherTools {
 
   // Register the tool. Provide a meaningful descriptions to help Opal understand how to use this tool.
   @tool({
-    name: 'get_weather',
-    description: 'Gets current weather for a location based on City name, State or Region code, and Country code. Set preferred Units.',
+    name: 'get_temperature',
+    description: 'Gets current temperature for a location based on City name, State or Region code, and Country code. Set preferred Units.',
     parameters: [
       {
         name: "city",
