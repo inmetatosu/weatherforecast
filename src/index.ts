@@ -11,8 +11,8 @@ interface WeatherParameters {
 
 interface WeatherResponse {
   temperature: number;
-  condition: string;
-  location: string;
+  // condition: string;
+  // location: string;
 }
 
 const app = express();
@@ -68,7 +68,7 @@ class WeatherTools {
       }
     ]
   })
-  async getWeather(parameters: WeatherParameters): Promise<WeatherResponse> {
+  async getTemperature(parameters: WeatherParameters): Promise<WeatherResponse> {
     try {
       const { city, state, country, units = '' } = parameters;
       const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
@@ -81,9 +81,9 @@ class WeatherTools {
 
       // Start with mock data in case an API key is not configured.
       let weatherData: WeatherResponse = {
-        temperature: units === 'fahrenheit' ? 72 : 22,
-        condition: 'sunny',
-        location: `${city}, ${state}, ${country}`,
+        temperature: units === 'fahrenheit' ? 72 : 22
+        // condition: 'sunny',
+        // location: `${city}, ${state}, ${country}`,
       };
 
       // Check for API key and use this to retrieve live weather.
